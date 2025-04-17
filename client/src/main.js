@@ -1,4 +1,7 @@
 import kaboom from "kaboom";
+import { initScenes } from "./scenes";
+import { loadAssets } from "./loaders/assets";
+import { audioManager } from "./audio";
 
 // Initialize Kaboom
 const k = kaboom({
@@ -10,14 +13,14 @@ const k = kaboom({
   debug: true,
 });
 
-// Create a simple scene
-k.scene("main", () => {
-  k.add([
-    k.text("Quirky Schoolbound RPG", 32),
-    k.pos(k.width() / 2, k.height() / 2),
-    k.origin("center"),
-  ]);
-});
+// Load audio
+audioManager.loadSounds();
 
-// Start with the main scene
-k.start("main");
+// Load visual assets
+loadAssets(k);
+
+// Initialize all scenes
+initScenes(k);
+
+// Start with the main menu
+k.start("mainMenu");
